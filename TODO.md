@@ -18,11 +18,19 @@
     - [ ] Different script for each bullet?
 
 ## David
-- [ ] Wiskers idle animation.
-- [ ] Wiskers run animation.
-- [ ] Wiskers jump animation.
-    - [ ] Frame 1: prepare for jump.
-    - [ ] Frame 2: jumping.
-    - [ ] Frame 3: falling.
-- [ ] Wiskers crouch animation.
-    - [ ] Only need one frame.
+- [ ] Animations.
+    - [ ] Wiskers.
+        - [ ] Idle animation.
+        - [ ] Run animation.
+        - [ ] Jump animation.
+            - [ ] Frame 1: prepare for jump.
+            - [ ] Frame 2: jumping.
+            - [ ] Frame 3: falling.
+        - [ ] Crouch animation.
+            - [ ] Only need one frame.
+    - [ ] Detonator dan.
+        - [ ] Idle (in ground).
+        - [ ] Jump up (out of ground arms/legs growing out of body)(keep it short, only a few frames so he can get to running).
+        - [ ] Chasing (run animation).
+        - [ ] Explode (seperate from explotion animation)(just him falling apart into peices onto the ground).
+    - [ ] Explotion.
