@@ -2,9 +2,9 @@
 
 ## Andrew
 - [ ] Finish player controller.
-    - [ ] Jump.
+    - [x] Jump.
     - [ ] Crouch.
-    - [ ] Move.
+    - [x] Move.
     - [ ] Jump up though platforms.
     - [ ] Crouch jump to go down platforms.
 - [ ] Weapons.
