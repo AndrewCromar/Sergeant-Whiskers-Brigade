@@ -3,6 +3,7 @@
 ## Andrew
 - [ ] Finish player controller.
     - [x] Jump.
+    - [ ] Variable jump height.
     - [ ] Crouch.
     - [x] Move.
     - [ ] Jump up though platforms.
