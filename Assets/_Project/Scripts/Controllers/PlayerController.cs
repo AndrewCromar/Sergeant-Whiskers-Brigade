@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 3f;
-    [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private float jumpForce = 6f;
+    [SerializeField] private float variableJumpForce = 4f;
 
     [Header("Ground Check")]
     [SerializeField] private Transform groundCheck;
@@ -63,6 +64,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
 
+    private bool variableJumpHeight;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -93,9 +96,11 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(isWalking ? calculatedMoveDirection * moveSpeed : 0, rb.velocity.y);
         }
 
+        variableJumpHeight = VariableJumpHeightToggleController.instance.variableJumpHeight;
+
         if (!isDashing)
         {
-            if (jumpInput && rb.velocity.y > 0)
+            if (jumpInput && rb.velocity.y > 0 && variableJumpHeight)
             {
                 rb.gravityScale = jumpGravity;
             }
@@ -193,7 +198,7 @@ public class PlayerController : MonoBehaviour
         // Check if jump.
         if (isGrounded && !isCrouching && !isDashing)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            rb.velocity = new Vector2(rb.velocity.x, variableJumpHeight ? variableJumpForce : jumpForce);
         }
 
         // Check if soft drop.

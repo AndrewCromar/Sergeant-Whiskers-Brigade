@@ -203,7 +203,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7685340d6f1d4f447a5254d0591c6e72, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -274,12 +274,13 @@ MonoBehaviour:
   graphics: {fileID: 3205751005798894828}
   col: {fileID: 4419235422824804977}
   moveSpeed: 3
-  jumpForce: 4
+  jumpForce: 5
+  variableJumpForce: 4
   groundCheck: {fileID: 4419235421257801864}
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  groundCheckRadius: 0.2
+  groundCheckRadius: 0.1
   dashForce: 5
   dashDuration: 0.3
   parryBoost: 4
@@ -585,7 +586,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.35, y: 0.25}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &5118998681598552267
 MonoBehaviour:
@@ -599,6 +600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdcc98e12c35fc844bc09911fc2d326b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCol: {fileID: 4419235422824804977}
   OnEnter:
     m_PersistentCalls:
       m_Calls:
@@ -630,3 +632,4 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   onewayTag: 
+  col: {fileID: 0}
