@@ -18,6 +18,7 @@
         - [ ] Firerate.
         - [ ] Graphics prefab.
     - [ ] Different script for each bullet?
+- [ ] Rename stuff from "wiskers" to "whiskers.
 
 ## David
 - [ ] Animations.
