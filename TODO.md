@@ -3,11 +3,12 @@
 ## Andrew
 - [ ] Finish player controller.
     - [x] Jump.
-    - [ ] Variable jump height.
-    - [ ] Crouch.
+    - [x] Variable jump height.
+    - [x] Crouch.
     - [x] Move.
-    - [ ] Jump up though platforms.
-    - [ ] Crouch jump to go down platforms.
+    - [x] Jump up though platforms.
+    - [x] Crouch jump to go down platforms.
+    - [ ] Fix crouching on controller.
 - [ ] Weapons.
     - [ ] Weapon system with only 2 guns.
     - [ ] Modular guns.
