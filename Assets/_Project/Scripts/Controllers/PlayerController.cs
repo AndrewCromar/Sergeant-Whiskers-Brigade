@@ -93,14 +93,14 @@ public class PlayerController : MonoBehaviour
         if (!isDashing)
         {
             float calculatedMoveDirection = Mathf.Abs(moveInput) > 0 ? moveDirection : 0;
-            rb.velocity = new Vector2(isWalking ? calculatedMoveDirection * moveSpeed : 0, rb.velocity.y);
+            rb.linearVelocity = new Vector2(isWalking ? calculatedMoveDirection * moveSpeed : 0, rb.linearVelocity.y);
         }
 
         variableJumpHeight = VariableJumpHeightToggleController.instance.variableJumpHeight;
 
         if (!isDashing)
         {
-            if (jumpInput && rb.velocity.y > 0 && variableJumpHeight)
+            if (jumpInput && rb.linearVelocity.y > 0 && variableJumpHeight)
             {
                 rb.gravityScale = jumpGravity;
             }
@@ -184,7 +184,7 @@ public class PlayerController : MonoBehaviour
         // Check if parry.
         if (canParry)
         {
-            rb.velocity = new Vector2(rb.velocity.x, parryBoost);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, parryBoost);
 
             Destroy(parryableObject);
             parryableObject = null;
@@ -198,7 +198,7 @@ public class PlayerController : MonoBehaviour
         // Check if jump.
         if (isGrounded && !isCrouching && !isDashing)
         {
-            rb.velocity = new Vector2(rb.velocity.x, variableJumpHeight ? variableJumpForce : jumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, variableJumpHeight ? variableJumpForce : jumpForce);
         }
 
         // Check if soft drop.
@@ -246,7 +246,7 @@ public class PlayerController : MonoBehaviour
     {
         rb.gravityScale = 0f;
         float dashDirection = moveDirection == 1 ? 1 : -1;
-        rb.velocity = new Vector2(dashDirection * dashForce, 0);
+        rb.linearVelocity = new Vector2(dashDirection * dashForce, 0);
         yield return new WaitForSeconds(dashDuration);
         rb.gravityScale = 1f;
         isDashing = false;
