@@ -1,4 +1,0 @@
-repository "Sergeant Whiskers Brigade@ONYX_Development@cloud"
-  path "/"
-    br "/main"
-    co "/main"
