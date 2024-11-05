@@ -6,12 +6,7 @@ We are still early in development so we only have one character (and few animati
 
 # How to Play
 
-1. Go to the release page [here](https://github.com/AndrewCromar/Sergeant-Whiskers-Brigade/releases/tag/demo-v0.01-beta).
-2. Download the attached source code zip folder.
-3. Unzip the folder.
-4. Navigate to the "Builds/Demo" folder.
-5. Run "Project FPS.exe".
-6. Boom! You are now playing the very early beta demo.
+Latest demo is on the ONYX website [here](https://onyx.andrewcromar.org/supersecretproject/play).
 
 # Controlls
 
@@ -19,12 +14,15 @@ We are still early in development so we only have one character (and few animati
 
 - Move: AD
 - Jump: Space
+- Crouch: Down Arrow
 - Parry: Space
 - Dash: Right Shift
 
 ### Controller
 - Move: Horizontal Left Stick
 - Jump: Button East
+- Crouch: Left Stick Down
+  > This still neets to be tuned, it does not work quite right.
 - Parry: Button East
 - Dash: Right Big Trigger
 
