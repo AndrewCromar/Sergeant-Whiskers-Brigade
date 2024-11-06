@@ -9,6 +9,7 @@
     - [x] Jump up though platforms.
     - [x] Crouch jump to go down platforms.
     - [x] Fix crouching on controller.
+    - [ ] Hitbox change on dash.
 - [ ] Weapons.
     - [ ] Weapon system with only 2 guns.
     - [ ] Modular guns.

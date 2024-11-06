@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 0.2f;
 
     [Header("Dash")]
+    [SerializeField] private Vector2 dashHitboxSize;
     [SerializeField] private float dashForce = 5f;
     [SerializeField] private float dashDuration = 0.3f;
     private bool canDash;
@@ -92,7 +93,15 @@ public class PlayerController : MonoBehaviour
         }
 
         CheckJumpBuffer();
+        SetHitboxSize();
         UpdateAnimator();
+    }
+
+    private void SetHitboxSize()
+    {
+        if (isDashing) col.size = dashHitboxSize;
+        else if (isCrouching) col.size = new Vector2(col.size.x, crouchHeight);
+        else col.size = new Vector2(col.size.x, defaultHeight);
     }
 
     private void CheckJumpBuffer()
@@ -202,7 +211,6 @@ public class PlayerController : MonoBehaviour
     private void OnCrouchInputDown()
     {
         transform.position = (Vector2)transform.position - new Vector2(0, (defaultHeight / 2) - (crouchHeight / 2));
-        col.size = new Vector2(col.size.x, crouchHeight);
 
         isCrouching = true;
         canDash = false;
@@ -210,7 +218,6 @@ public class PlayerController : MonoBehaviour
     private void OnCrouchInputUp()
     {
         transform.position = (Vector2)transform.position + new Vector2(0, (defaultHeight / 2) - (crouchHeight / 2));
-        col.size = new Vector2(col.size.x, defaultHeight);
 
         isCrouching = false;
     }
