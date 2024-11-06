@@ -1,10 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -34,10 +32,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float parryDistance = 0.5f;
 
     [Header("Jump Buffer")]
-    [SerializeField] private float normalGravity = 1;
-    [SerializeField] private float jumpGravity = 0.5f;
-
-    [Header("Jump Buffer")]
     [SerializeField] private int frame_buffer;
     [SerializeField] private List<bool> buffered_jumps = new List<bool>();
 
@@ -63,8 +57,6 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isGrounded;
-
-    private bool variableJumpHeight;
 
     void Start()
     {
@@ -94,20 +86,6 @@ public class PlayerController : MonoBehaviour
         {
             float calculatedMoveDirection = Mathf.Abs(moveInput) > 0 ? moveDirection : 0;
             rb.linearVelocity = new Vector2(isWalking ? calculatedMoveDirection * moveSpeed : 0, rb.linearVelocity.y);
-        }
-
-        variableJumpHeight = VariableJumpHeightToggleController.instance.variableJumpHeight;
-
-        if (!isDashing)
-        {
-            if (jumpInput && rb.linearVelocity.y > 0 && variableJumpHeight)
-            {
-                rb.gravityScale = jumpGravity;
-            }
-            else
-            {
-                rb.gravityScale = normalGravity;
-            }
         }
 
         CheckJumpBuffer();
@@ -198,7 +176,7 @@ public class PlayerController : MonoBehaviour
         // Check if jump.
         if (isGrounded && !isCrouching && !isDashing)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, variableJumpHeight ? variableJumpForce : jumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
 
         // Check if soft drop.
