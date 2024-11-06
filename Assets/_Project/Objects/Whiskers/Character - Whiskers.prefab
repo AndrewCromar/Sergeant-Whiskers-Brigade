@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 8191102483146448513}
   - component: {fileID: 6113832551475326359}
   m_Layer: 6
-  m_Name: Character - Wiskers
+  m_Name: Character - Whiskers
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

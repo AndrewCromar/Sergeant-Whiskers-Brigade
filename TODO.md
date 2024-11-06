@@ -27,7 +27,7 @@
         - [ ] Trigger areas for going into levels.
     - [ ] Levels.
         - [ ] Game over screen.
-- [ ] Rename stuff from "wiskers" to "whiskers.
+- [x] Rename stuff from "wiskers" to "whiskers.
 
 ## David
 - [ ] Animations.
