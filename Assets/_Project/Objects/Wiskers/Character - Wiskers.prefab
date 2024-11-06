@@ -113,6 +113,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -189,7 +192,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &4419235422824804983
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -200,8 +203,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 7685340d6f1d4f447a5254d0591c6e72, type: 2}
   m_IncludeLayers:
@@ -222,6 +225,7 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4419235422824804979}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -245,7 +249,8 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
@@ -256,7 +261,6 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 0.35, y: 0.9}
   m_EdgeRadius: 0
 --- !u!114 &2976070488025485325
@@ -286,26 +290,26 @@ MonoBehaviour:
   parryBoost: 4
   parryTag: parryable
   parryDistance: 0.5
-  normalGravity: 1
-  jumpGravity: 0.5
-  frame_buffer: 1
-  buffered_jumps: 
+  frame_buffer: 5
+  buffered_jumps: 0000000000
   defaultHeight: 0.9
   crouchHeight: 0.45
   defaultLayerName: Player
   softDropLayerName: SoftDrop
   onewayTag: oneway
   parryableObject: {fileID: 0}
-  jumpInput: 0
   isDashing: 0
   isWalking: 0
   isCrouching: 0
   didParry: 0
   canParry: 0
   moveDirection: 1
+  moveInput: 0
+  crouchInput: {x: 0, y: 0}
+  lastCrouchInput: {x: 0, y: 0}
 --- !u!95 &8191102483146448513
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -319,6 +323,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -350,25 +355,9 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2976070488025485325}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnJumpInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: ef3895b1-3bcb-48d3-9a00-764cf6c87938
-    m_ActionName: Player/Jump[/Keyboard/space]
-  - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 158ee9cb-7540-46ef-a91c-e12b152d9c86
-    m_ActionName: Player/Shoot[/Keyboard/enter]
+    m_ActionName: 'Player/Shoot[/Keyboard/enter]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2976070488025485325}
@@ -384,27 +373,11 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: f4629e12-c70f-43ec-80de-ed2a8736662c
-    m_ActionName: Player/Dash[/Keyboard/rightShift]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2976070488025485325}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnMoveInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 089ca421-a480-4446-be46-b23312d5f8a9
-    m_ActionName: Player/Move[/Keyboard/a,/Keyboard/d]
+    m_ActionName: 'Player/Dash[/Keyboard/rightShift]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: e9d45359-33be-46de-8450-eeb0dc6b3c2b
-    m_ActionName: User/Join[/Keyboard/enter]
+    m_ActionName: 'User/Join[/Keyboard/enter]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2976070488025485325}
@@ -419,8 +392,40 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 229af956-1bd7-4b74-a0c8-66e9512d6fb2
-    m_ActionName: Player/Crouch[/Keyboard/s,/Keyboard/downArrow]
+    m_ActionId: 7749ba02-9530-4320-b419-0acd586cc362
+    m_ActionName: 'Player/Movement[/Keyboard/space,/Keyboard/s,/Keyboard/a,/Keyboard/d,/XInputControllerWindows/buttonSouth,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/right]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2976070488025485325}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnMoveInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 093d0f99-7b91-4434-b6e8-e1bb08cc7f42
+    m_ActionName: 'Player/Horizontal Movement[/Keyboard/a,/Keyboard/d,/XInputControllerWindows/leftStick/x]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2976070488025485325}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnJumpInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 705318e0-df98-46b9-bc7f-5ca63c8cc3e7
+    m_ActionName: 'Player/Jump[/Keyboard/space,/XInputControllerWindows/buttonSouth]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -475,6 +480,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -551,6 +559,7 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7243118423492582667}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -574,7 +583,8 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -585,7 +595,6 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &5118998681598552267

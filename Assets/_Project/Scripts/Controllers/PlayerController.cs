@@ -46,14 +46,15 @@ public class PlayerController : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] private GameObject parryableObject;
-    [SerializeField] private bool jumpInput;
     [SerializeField] private bool isDashing = false;
     [SerializeField] private bool isWalking = false;
     [SerializeField] private bool isCrouching = false;
     [SerializeField] private bool didParry = false;
     [SerializeField] private bool canParry = false;
     [SerializeField] private float moveDirection = 1;
-    private float moveInput;
+    [SerializeField] private float moveInput;
+    [SerializeField] private Vector2 crouchInput;
+    [SerializeField] private Vector2 lastCrouchInput;
 
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -70,6 +71,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(moveInput);
+
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
         CheckCanParry();
@@ -111,52 +114,18 @@ public class PlayerController : MonoBehaviour
         didParry = false;
     }
 
-    private void CheckCanParry()
-    {
-        GameObject[] allParryableObjects = GameObject.FindGameObjectsWithTag(parryTag);
-        List<GameObject> validParryableObject = new List<GameObject>();
-
-        foreach (GameObject testParryableObject in allParryableObjects)
-        {
-            if (Vector2.Distance(transform.position, testParryableObject.transform.position) <= parryDistance)
-            {
-                validParryableObject.Add(testParryableObject);
-            }
-        }
-
-        parryableObject = validParryableObject.Count > 0 ? validParryableObject[0] : null;
-
-        canParry = !isGrounded && (validParryableObject.Count > 0) && !isDashing;
-    }
-
-    public void OnMoveInput(InputAction.CallbackContext ctx)
-    {
-        moveInput = ctx.ReadValue<float>();
-    }
-
+    #region Jump
     public void OnJumpInput(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed) OnJumpInputDown();
-        if (!ctx.performed) OnJumpInputUp();
-    }
+        if (!ctx.performed) return;
 
-    private void OnJumpInputDown()
-    {
         AttemptJump();
 
         if (!isGrounded && !isDashing && !didParry)
         {
             buffered_jumps[frame_buffer] = true;
         }
-
-        jumpInput = true;
     }
-
-    private void OnJumpInputUp()
-    {
-        jumpInput = false;
-    }
-
     private void AttemptJump()
     {
         // Check if parry.
@@ -185,6 +154,67 @@ public class PlayerController : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer(softDropLayerName);
         }
     }
+    private void CheckCanParry()
+    {
+        GameObject[] allParryableObjects = GameObject.FindGameObjectsWithTag(parryTag);
+        List<GameObject> validParryableObject = new List<GameObject>();
+
+        foreach (GameObject testParryableObject in allParryableObjects)
+        {
+            if (Vector2.Distance(transform.position, testParryableObject.transform.position) <= parryDistance)
+            {
+                validParryableObject.Add(testParryableObject);
+            }
+        }
+
+        parryableObject = validParryableObject.Count > 0 ? validParryableObject[0] : null;
+
+        canParry = !isGrounded && (validParryableObject.Count > 0) && !isDashing;
+    }
+    #endregion
+
+    #region Move
+    public void OnMoveInput(InputAction.CallbackContext ctx)
+    {
+        moveInput = ctx.ReadValue<float>();
+    }
+    #endregion
+
+    #region Crouch
+    public void OnCrouchInput(InputAction.CallbackContext ctx)
+    {
+        lastCrouchInput = crouchInput;
+        crouchInput = ctx.ReadValue<Vector2>();
+
+        if (CheckCrouchAngle(crouchInput) && !CheckCrouchAngle(lastCrouchInput))
+        {
+            OnCrouchInputDown();
+        }
+        else if (!CheckCrouchAngle(crouchInput) && CheckCrouchAngle(lastCrouchInput))
+        {
+            OnCrouchInputUp();
+        }
+    }
+    private bool CheckCrouchAngle(Vector2 _moveInput)
+    {
+        return _moveInput.y < 0 && Mathf.Abs(_moveInput.x) < 0.5f;
+    }
+    private void OnCrouchInputDown()
+    {
+        transform.position = (Vector2)transform.position - new Vector2(0, (defaultHeight / 2) - (crouchHeight / 2));
+        col.size = new Vector2(col.size.x, crouchHeight);
+
+        isCrouching = true;
+        canDash = false;
+    }
+    private void OnCrouchInputUp()
+    {
+        transform.position = (Vector2)transform.position + new Vector2(0, (defaultHeight / 2) - (crouchHeight / 2));
+        col.size = new Vector2(col.size.x, defaultHeight);
+
+        isCrouching = false;
+    }
+    #endregion
 
     public void OnDashInput(InputAction.CallbackContext ctx)
     {
@@ -193,25 +223,6 @@ public class PlayerController : MonoBehaviour
             canDash = false;
             isDashing = true;
             StartCoroutine(DashCoroutine());
-        }
-    }
-
-    public void OnCrouchInput(InputAction.CallbackContext ctx)
-    {
-        if (ctx.started)
-        {
-            transform.position = (Vector2)transform.position - new Vector2(0, (defaultHeight / 2) - (crouchHeight / 2));
-            col.size = new Vector2(col.size.x, crouchHeight);
-
-            isCrouching = true;
-            canDash = false;
-        }
-        else if (ctx.canceled)
-        {
-            transform.position = (Vector2)transform.position + new Vector2(0, (defaultHeight / 2) - (crouchHeight / 2));
-            col.size = new Vector2(col.size.x, defaultHeight);
-
-            isCrouching = false;
         }
     }
 

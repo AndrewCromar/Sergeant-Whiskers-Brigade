@@ -8,7 +8,7 @@
     - [x] Move.
     - [x] Jump up though platforms.
     - [x] Crouch jump to go down platforms.
-    - [ ] Fix crouching on controller.
+    - [x] Fix crouching on controller.
 - [ ] Weapons.
     - [ ] Weapon system with only 2 guns.
     - [ ] Modular guns.
