@@ -18,6 +18,15 @@
         - [ ] Firerate.
         - [ ] Graphics prefab.
     - [ ] Different script for each bullet?
+- [ ] Scenes.
+    - [ ] Main menu.
+        - [ ] Title screen (press any button to start).
+        - [ ] Save select.
+    - [ ] Level select.
+        - [ ] Little dudes.
+        - [ ] Trigger areas for going into levels.
+    - [ ] Levels.
+        - [ ] Game over screen.
 - [ ] Rename stuff from "wiskers" to "whiskers.
 
 ## David
