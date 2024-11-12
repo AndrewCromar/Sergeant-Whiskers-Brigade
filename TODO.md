@@ -1,15 +1,6 @@
 # This is wtf we have to do.
 
 ## Andrew
-- [x] Finish player controller.
-    - [x] Jump.
-    - [x] Variable jump height.
-    - [x] Crouch.
-    - [x] Move.
-    - [x] Jump up though platforms.
-    - [x] Crouch jump to go down platforms.
-    - [x] Fix crouching on controller.
-    - [x] Hitbox change on dash.
 - [ ] Weapons.
     - [ ] Weapon system with only 2 guns.
     - [ ] Modular guns.
@@ -28,12 +19,10 @@
         - [ ] Trigger areas for going into levels.
     - [ ] Levels.
         - [ ] Game over screen.
-- [x] Rename stuff from "wiskers" to "whiskers.
 
 ## David
 - [ ] Animations.
     - [ ] Wiskers.
-        - [x] Idle animation.
         - [ ] Run animation.
         - [ ] Jump animation.
             - [ ] Frame 1: prepare for jump.
