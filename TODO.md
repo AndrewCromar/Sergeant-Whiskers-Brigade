@@ -1,7 +1,7 @@
 # This is wtf we have to do.
 
 ## Andrew
-- [ ] Finish player controller.
+- [x] Finish player controller.
     - [x] Jump.
     - [x] Variable jump height.
     - [x] Crouch.
@@ -9,7 +9,7 @@
     - [x] Jump up though platforms.
     - [x] Crouch jump to go down platforms.
     - [x] Fix crouching on controller.
-    - [ ] Hitbox change on dash.
+    - [x] Hitbox change on dash.
 - [ ] Weapons.
     - [ ] Weapon system with only 2 guns.
     - [ ] Modular guns.
@@ -33,7 +33,7 @@
 ## David
 - [ ] Animations.
     - [ ] Wiskers.
-        - [ ] Idle animation.
+        - [x] Idle animation.
         - [ ] Run animation.
         - [ ] Jump animation.
             - [ ] Frame 1: prepare for jump.
