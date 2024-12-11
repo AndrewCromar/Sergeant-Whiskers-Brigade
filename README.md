@@ -6,7 +6,7 @@ We are still early in development so we only have one character (and few animati
 
 # How to Play
 
-Latest demo is on the ONYX website [here](https://onyx.andrewcromar.org/supersecretproject/play).
+Latest demo is on the ONYX website [here](https://onyx.andrewcromar.org/whiskers/demo/play).
 
 # Controlls
 
