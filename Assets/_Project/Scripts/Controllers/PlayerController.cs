@@ -72,8 +72,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(moveInput);
-
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
         CheckCanParry();

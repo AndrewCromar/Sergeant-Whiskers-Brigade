@@ -278,7 +278,7 @@ MonoBehaviour:
   graphics: {fileID: 3205751005798894828}
   col: {fileID: 4419235422824804977}
   moveSpeed: 3
-  jumpForce: 5
+  jumpForce: 5.25
   variableJumpForce: 4
   groundCheck: {fileID: 4419235421257801864}
   groundLayer:
